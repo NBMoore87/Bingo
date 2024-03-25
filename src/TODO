@@ -1,6 +1,9 @@
 TODO:
-Finish base game
+✅ Finish base game
+- Make board static and not repeat every guess
 - Fix numbers not repeating when missed
-- Add color picker
+- Add warning when you guess a number that's not there
+✅ Add color picker
 - Add automatic/manual X's
 - Settings menu (w/ key press)
+- Leaderboards

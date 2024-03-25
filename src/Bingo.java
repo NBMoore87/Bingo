@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Random;
 
 /**
@@ -11,6 +10,7 @@ import java.util.Random;
  * @author NBMoore87
  */
 public class Bingo {
+    private String color;
     private final String[][] board = new String[5][5];
     public Bingo() { //empty board constructor
         for (int i = 0; i < 5; i++) {
@@ -20,7 +20,8 @@ public class Bingo {
         }
     }
 
-    public Bingo(Random rand) { //random board constructor
+    public Bingo(Random rand, String color) { //random board constructor
+        this.color = color;
         for (int i = 0; i < 5; i++) {
             ArrayList<Integer> nums = new ArrayList<>();
             int colBounds = (i+1)*15; //bounds for each column's numbers
@@ -33,20 +34,20 @@ public class Bingo {
                 board[i][j] = String.valueOf(cellNum);
             }
         }
-        board[2][2] = "\u001B[32m" + "X" + "\u001B[0m"; //free space
+        board[2][2] = "\u001B["+color+"m" + "X" + "\u001B[0m"; //free space
     }
 
     public void checkTile(int[] nums, int num) throws IndexOutOfBoundsException { //checks if a tile is the correct value
-        if (!(board[nums[0]][nums[1]].equals("\u001B[32m" + "X" + "\u001B[0m"))) {
+        if (!(board[nums[0]][nums[1]].equals("\u001B["+color+"m" + "X" + "\u001B[0m"))) {
             if (Integer.parseInt(board[nums[0]][nums[1]]) == num) {
-                board[nums[0]][nums[1]] = "\u001B[32m" + "X" + "\u001B[0m";
+                board[nums[0]][nums[1]] = "\u001B["+color+"m" + "X" + "\u001B[0m";
             }
         }
     }
     public boolean checkForNum(int num) { //checks if board has any x's (unused)
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                if (!board[i][j].equals("\u001B[32m" + "X" + "\u001B[0m")) {
+                if (!board[i][j].equals("\u001B["+color+"m" + "X" + "\u001B[0m")) {
                     if (Integer.parseInt(board[i][j]) == num) {
                         return true;
                     }
@@ -74,7 +75,7 @@ public class Bingo {
         for (int i = 0; i < 5; i++) {
             int xCounter = 0;
             for (int j = 0; j < 5; j++) {
-                if (board[i][j].equals("\u001B[32m" + "X" + "\u001B[0m")) {
+                if (board[i][j].equals("\u001B["+color+"m" + "X" + "\u001B[0m")) {
                     xCounter++;
                 }
             }
@@ -89,7 +90,7 @@ public class Bingo {
         for (int i = 0; i < 5; i++) {
             int xCounter = 0;
             for (int j = 0; j < 5; j++) {
-                if (board[j][i].equals("\u001B[32m" + "X" + "\u001B[0m")) {
+                if (board[j][i].equals("\u001B["+color+"m" + "X" + "\u001B[0m")) {
                     xCounter++;
                 }
             }
@@ -103,7 +104,7 @@ public class Bingo {
     public boolean checkDiag() { //checks through each diagonal for a bingo
         int xCounter = 0;
         for (int i = 0; i < 5; i++) { // top left diagonal
-            if (board[i][i].equals("\u001B[32m" + "X" + "\u001B[0m")) {
+            if (board[i][i].equals("\u001B["+color+"m" + "X" + "\u001B[0m")) {
                 xCounter++;
             }
         }
@@ -113,7 +114,7 @@ public class Bingo {
 
         xCounter = 0;
         for (int i = 4; i >= 0; i--) { // top right diagonal
-            if (board[i][i].equals("\u001B[32m" + "X" + "\u001B[0m")) {
+            if (board[i][i].equals("\u001B["+color+"m" + "X" + "\u001B[0m")) {
                 xCounter++;
             }
         }
@@ -123,7 +124,7 @@ public class Bingo {
 
         xCounter = 0;
         for (int i = 0; i < 5; i++) { // bottom left diagonal
-            if (board[i][4-i].equals("\u001B[32m" + "X" + "\u001B[0m")) {
+            if (board[i][4-i].equals("\u001B["+color+"m" + "X" + "\u001B[0m")) {
                 xCounter++;
             }
         }
@@ -133,7 +134,7 @@ public class Bingo {
 
         xCounter = 0;
         for (int i = 4; i >= 0; i--) { // bottom right diagonal
-            if (board[4-i][i].equals("\u001B[32m" + "X" + "\u001B[0m")) {
+            if (board[4-i][i].equals("\u001B["+color+"m" + "X" + "\u001B[0m")) {
                 xCounter++;
             }
         }

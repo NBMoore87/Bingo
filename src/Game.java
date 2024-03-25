@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 
 public class Game {
+    static String color = "0";
     static boolean bingo = false; //true when player gets bingo
     static int[] playerCoords = new int[2]; //stores the players input to translate to board coordinates
 
@@ -25,15 +26,22 @@ public class Game {
         return column;
     }
 
+    public static void spacing(int spaces) {
+        for (int i = 0; i < spaces; i++) {
+            System.out.println();
+        }
+    }
     public static void gameLoop() { //plays bingo
         Random rnd = new Random();
-        Bingo game = new Bingo(rnd);
+        Bingo game = new Bingo(rnd, color);
 
         int currNum = rnd.nextInt(1, 76);
         ArrayList<Integer> nums = new ArrayList<>();
         nums.add(currNum);
         System.out.println(game.toString());
 
+        bingo = false;
+        spacing(2);
         while (!bingo) { //bingo game loop
             try { //detects invalid input
                 Scanner scnr = new Scanner(System.in);
@@ -77,8 +85,46 @@ public class Game {
         }
     }
 
+    public static void options() {
+        spacing(15);
+        boolean options = true;
+        Scanner scnr = new Scanner(System.in);
+        while (options) {
+            System.out.println("Type 'Quit' to exit options");
+            System.out.println("Color options: 'Red', 'Green', 'Yellow', 'Blue', 'Purple', 'Cyan', 'Gray'");
+            switch (scnr.next()) {
+                case "Red" -> color = "31";
+                case "Green" -> color = "32";
+                case "Yellow" -> color = "33";
+                case "Blue" -> color = "34";
+                case "Purple" -> color = "35";
+                case "Cyan" -> color = "36";
+                case "White" -> color = "37";
+                case "Quit" -> options = false;
+            }
+        }
+    }
     public static void main(String[] args) { //main method
+        Scanner scnr = new Scanner(System.in);
         System.out.println("Welcome to BINGO!");
-        gameLoop();
+        label:
+        while (true) {
+            System.out.println("Type 'Play' to play a game, 'Options' to view the game options, or 'Quit' to exit.");
+            String word = scnr.next();
+            switch (word) {
+                case "Play":
+                    gameLoop();
+                    break;
+                case "Options":
+                    options();
+                    break;
+                case "Quit":
+                    break label;
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+            spacing(15);
+        }
     }
 }
