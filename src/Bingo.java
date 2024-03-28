@@ -10,7 +10,7 @@ import java.util.Random;
  * @author NBMoore87
  */
 public class Bingo {
-    private String color;
+    private String color; //the color that the player selects
     private final String[][] board = new String[5][5];
     public Bingo() { //empty board constructor
         for (int i = 0; i < 5; i++) {

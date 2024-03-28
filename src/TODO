@@ -4,6 +4,8 @@ TODO:
 - Fix numbers not repeating when missed
 - Add warning when you guess a number that's not there
 ✅ Add color picker
+- Add case insensitivity
 - Add automatic/manual X's
 - Settings menu (w/ key press)
-- Leaderboards
+✅ Leaderboards
+- Firebase account and public leaderboards
